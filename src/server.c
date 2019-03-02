@@ -5,11 +5,13 @@
 // c++ -Iinclude_test/boost_1_69_0/  src/server.cpp -o example
 // c++ -Iinclude_test/boost_1_69_0/  src/server.cpp -o example
 // c++ -std=c++11 src/server.cpp -o example
+// c++ -x c src/server.cpp -o example
+// c++ -I /Users/jpcf/Desktop/test/boost_1_65_0 /Users/jpcf/swAtelier/src/showcase/showcase_sandbox/cpp/casual/KnowYourTrade.cpp  -o example
 
 // Server side C/C++ program to demonstrate Socket programming
 //Example code: A simple server side code, which echos back the received message.
 //Handle multiple socket connections with select and fd_set on Linux
-/*
+
 #include <stdio.h>
 #include <string.h> //strlen
 #include <stdlib.h>

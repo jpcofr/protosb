@@ -4,4 +4,4 @@
 !*.cpp
 !CMakeLists.txt
 !*/
-
+!*.md

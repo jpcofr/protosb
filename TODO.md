@@ -1,6 +1,10 @@
 # TODO
 
 - Client + Server communicating OSPF packets using raw sockets
+  - Keep the server listening
+  - Server listen to many clients on demand
+  - Server listens to many clients on different interfaces
+- Send and receive OSPF packages
 
 - Configure many interfaces on container (each of them needs an IP)
 - [Mixing C and C++ code](https://isocpp.org/wiki/faq/mixing-c-and-cpp)

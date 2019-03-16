@@ -1,8 +1,8 @@
 # TODO
 
 - Client + Server communicating OSPF packets using raw sockets
-  - Keep the server listening
-  - Server listen to many clients on demand
+
+  - Document the server/client code
   - Server listens to many clients on different interfaces
 - Send and receive OSPF packages
 
@@ -20,6 +20,12 @@
 - <https://hub.docker.com/_/gcc>
 
 # Reference
+
+<https://www.tcpdump.org/manpages/tcpdump.1.html>
+<https://hackertarget.com/tcpdump-examples/>
+<https://dzone.com/articles/parallel-tcpip-socket-server-with-multi-threading>
+<https://codereview.stackexchange.com/questions/143286/multithreaded-client-server-communication>
+<https://www.geeksforgeeks.org/socket-programming-in-cc-handling-multiple-clients-on-server-without-multi-threading/>
 
 [Multiple executables](https://stackoverflow.com/questions/14306642/adding-multiple-executables-in-cmake)
 [Raw sockets](https://www.tenouk.com/Module43a.html)

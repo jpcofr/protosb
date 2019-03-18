@@ -1,11 +1,12 @@
 # TODO
 
 - Client + Server communicating OSPF packets using raw sockets
-  - Document the server/client code
-  - Server listens to many clients on different interfaces
+
   - Raw socket development
     - [Listening on raw sockets](https://stackoverflow.com/questions/13082023/raw-socket-listener)
     - [IP SPOOFING with BSD RAW SOCKETS INTERFACE](http://www.enderunix.org/docs/en/rawipspoof/)
+    - [Raw socket tutorial](http://www.cs.binghamton.edu/~steflik/cs455/rawip.txt)
+    - Server listens to many clients on different interfaces
 - Send and receive OSPF packages
 
 - Configure many interfaces on container (each of them needs an IP)

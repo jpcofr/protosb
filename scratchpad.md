@@ -10,10 +10,16 @@ docker run -it --security-opt seccomp=unconfined -v /Users/jpcf/Dropbox/protosb:
 docker run -it --net container:<CONTAINER NAME>  nicolaka/netshoot
 
 ## TCPDUMP
- tcpdump -i eth0 port 9999 -c 1 -Xvv
+ tcpdump -i eth0 port 8080 -c 1 -Xvv
 
 <https://hackertarget.com/tcpdump-examples/>
 
 ## alpine
 
 apk add gdb
+
+## CMake
+Clean cmake trash
+`find . -iwholename '*cmake*' -not -name CMakeLists.txt -delete`
+
+ tcpdump -i eth0 port 8080 -Xvv -A

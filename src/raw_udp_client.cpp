@@ -1,6 +1,6 @@
-// RAW SERVER
+// UDP client that sends raw
 // Building and injecting RAW datagrams program examples
-// Must be run by root lol! Just datagram, no payload/data
+// Must be run by root. Just datagram, no payload/data
 #include <arpa/inet.h>
 #include <netinet/ip.h>
 #include <netinet/udp.h>
@@ -8,9 +8,22 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
+#include <iostream>
 #include <unistd.h>
+#include <string>
 
 #define PCKT_LEN 8192
+#define PORT_SOURCE 8080
+#define PORT_DESTINATION 8080
+
+#define SERVER_IP_1 "172.17.0.2"
+#define SERVER_IP_2 "172.17.0.2"
+
+void server_error(std::string msg)
+{
+  std::cerr << msg;
+  exit(EXIT_FAILURE);
+}
 
 struct ipheader
 {
@@ -40,7 +53,6 @@ struct udpheader
 //  "The checksum field is the 16 bit one's complement of the one's
 //  complement sum of all 16 bit words in the header.  For purposes of
 //  computing the checksum, the value of the checksum field is zero."
-
 unsigned short csum(unsigned short *buf, int nwords)
 {
   unsigned long sum;
@@ -55,7 +67,6 @@ unsigned short csum(unsigned short *buf, int nwords)
 }
 
 // Source IP, source port, target IP, target port from the command line arguments
-
 int main(int argc, char *argv[])
 {
   int sd;
@@ -75,30 +86,13 @@ int main(int argc, char *argv[])
 
   memset(buffer, 0, PCKT_LEN);
 
-  if (argc != 5)
-  {
-
-    printf("- Invalid parameters!!!\n");
-
-    printf("- Usage %s <source hostname/IP> <source port> <target hostname/IP> <target port>\n", argv[0]);
-
-    exit(-1);
-  }
-
   // Create a raw socket with UDP protocol
 
   sd = socket(PF_INET, SOCK_RAW, IPPROTO_UDP);
   if (sd < 0)
-  {
-
-    perror("socket() error");
-
-    // If something wrong just exit
-    exit(-1);
-  }
+    server_error("socket() error");
   else
-
-    printf("socket() - Using SOCK_RAW socket and UDP protocol is OK.\n");
+    std::cout << "socket() - Using SOCK_RAW socket and UDP protocol is OK.\n";
 
   // The source is redundant, may be used later if needed
 
@@ -107,12 +101,12 @@ int main(int argc, char *argv[])
   din.sin_family = AF_INET;
 
   // Port numbers
-  sin.sin_port = htons(atoi(argv[2]));
-  din.sin_port = htons(atoi(argv[4]));
+  sin.sin_port = htons(PORT_SOURCE);
+  din.sin_port = htons(PORT_DESTINATION);
 
   // IP addresses
-  sin.sin_addr.s_addr = inet_addr(argv[1]);
-  din.sin_addr.s_addr = inet_addr(argv[3]);
+  sin.sin_addr.s_addr = inet_addr(SERVER_IP_1);
+  din.sin_addr.s_addr = inet_addr(SERVER_IP_2);
 
   // Fabricate the IP header or we can use the
   // standard header structures but assign our own values.
@@ -125,49 +119,39 @@ int main(int argc, char *argv[])
   ip->iph_protocol = 17; // UDP
 
   // Source IP address, can use spoofed address here!!!
-  ip->iph_sourceip = inet_addr(argv[1]);
+  ip->iph_sourceip = inet_addr(SERVER_IP_1);
   // The destination IP address
-  ip->iph_destip = inet_addr(argv[3]);
+  ip->iph_destip = inet_addr(SERVER_IP_2);
 
   // Fabricate the UDP header. Source port number, redundant
-  udp->udph_srcport = htons(atoi(argv[2]));
+  udp->udph_srcport = htons(PORT_SOURCE);
 
   // Destination port number
-  udp->udph_destport = htons(atoi(argv[4]));
+  udp->udph_destport = htons(PORT_DESTINATION);
   udp->udph_len = htons(sizeof(struct udpheader));
 
   // Calculate the checksum for integrity
   ip->iph_chksum = csum((unsigned short *)buffer, sizeof(struct ipheader) + sizeof(struct udpheader));
 
   // Inform the kernel do not fill up the packet structure. we will build our own...
-
   if (setsockopt(sd, IPPROTO_IP, IP_HDRINCL, val, sizeof(one)) < 0)
-  {
-
-    perror("setsockopt() error");
-
-    exit(-1);
-  }
+    server_error("setsockopt() error");
   else
-    printf("setsockopt() is OK.\n");
+    std::cout << "setsockopt() is OK.\n";
 
   // Send loop, send for every 2 second for 100 count
   printf("Trying...\n");
   printf("Using raw socket and UDP protocol\n");
-  printf("Using Source IP: %s port: %u, Target IP: %s port: %u.\n", argv[1], atoi(argv[2]), argv[3], atoi(argv[4]));
+  printf("Using Source IP: %s port: %u, Target IP: %s port: %u.\n", SERVER_IP_1, PORT_SOURCE, SERVER_IP_2, PORT_DESTINATION);
 
   int count;
   for (count = 1; count <= 20; count++)
   {
     if (sendto(sd, buffer, ip->iph_len, 0, (struct sockaddr *)&sin, sizeof(sin)) < 0)
-    // Verify
-    {
-      perror("sendto() error");
-      exit(-1);
-    }
+      server_error("sendto() error"); // Verify
     else
     {
-      printf("Count #%u - sendto() is OK.\n", count);
+      std::cout << "Count " << count << " - sendto() is OK.\n";
       sleep(2);
     }
   }

@@ -3,13 +3,13 @@
 #include <netinet/in.h> // The header file in.h contains constants and structures
                         // needed for internet domain addresses. Includes socket.h
 #include <sys/epoll.h>
-#include <unistd.h> // Header file that provides access to the POSIX operating system API
+#include <unistd.h> // Header file providing access to the POSIX operating system API
 #include <fcntl.h>
 
-#define PORT 8080
+#define SERVER_PORT 8080
 #define MAX_EVENTS 10
 
-void server_error(std::string msg)
+void server_error(const std::string &msg)
 {
   std::cerr << msg;
   exit(EXIT_FAILURE);
@@ -48,7 +48,7 @@ int main(int argc, char const *argv[])
   struct sockaddr_in server_address;           // (See https://bit.ly/2TGyP27)
   server_address.sin_family = AF_INET;         // (sa_family_t) Address family: AF_INET
   server_address.sin_port =                    // (in_port_t) Port in network byte order
-      htons(PORT);                             // Convert values between host and network byte order (See https://bit.ly/2FhI9AC)
+      htons(SERVER_PORT);                             // Convert values between host and network byte order (See https://bit.ly/2FhI9AC)
   server_address.sin_addr.s_addr = INADDR_ANY; // (struct in_addr) Internet address, a plain integer.
                                                // INADDR_ANY =(u_int32_t)0x00000000
 
@@ -106,8 +106,7 @@ int main(int argc, char const *argv[])
 
   struct epoll_event epoll_events[MAX_EVENTS];
   int incoming_connection_socket_descriptor;
-  int server_address_length = sizeof(server_address);
-  struct sockaddr_in client_address;
+    struct sockaddr_in client_address;
   int client_address_length = sizeof(client_address);
   while (true)
   {
@@ -178,7 +177,7 @@ int main(int argc, char const *argv[])
                  1024                     // Number of bytes to be read
                  ) < 0)
           server_error("read");
-
+        std::cout << "got something..." << std::endl;
         std::cout << buffer << std::endl;
       }
     }

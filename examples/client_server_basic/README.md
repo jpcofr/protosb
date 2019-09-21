@@ -4,7 +4,7 @@
 
 # Docker tips
 
-This command runs an unsecured linux attached to the local terminal that maps the container /home directory into the developmen directory.
+This command runs an unsecured linux attached to the local terminal that maps the container /home directory into the development directory.
 
 `docker run -it --security-opt seccomp=unconfined -v /Users/jpcf/Dropbox/protosb:/home/ alpine_devel:latest`
 
@@ -17,5 +17,3 @@ This command runs an unsecured linux attached to the local terminal that maps th
 * Captures the packets on an interface and port and parses them to ascii
 
 `tcpdump -i eth0 port 8080 -c 1 -Xvv -A`
-
-

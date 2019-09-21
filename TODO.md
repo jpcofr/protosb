@@ -1,8 +1,11 @@
 # TODO
 
+- Start reading the RFC <https://www.ietf.org/rfc/rfc2328.txt>
+  - [Cisco docs about OSPF](https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/7039-1.html)
 - Client + Server communicating OSPF packets using raw sockets
 
   - Raw socket development
+    - Listen to artificial TCP packets
     - [Listening on raw sockets](https://stackoverflow.com/questions/13082023/raw-socket-listener)
     - [IP SPOOFING with BSD RAW SOCKETS INTERFACE](http://www.enderunix.org/docs/en/rawipspoof/)
     - [Raw socket tutorial](http://www.cs.binghamton.edu/~steflik/cs455/rawip.txt)
@@ -21,6 +24,7 @@
 - https://theboostcpplibraries.com/boost.graph-vertices-and-edges
 - https://theboostcpplibraries.com/
 - <https://hub.docker.com/_/gcc>
+- Use inet_ntop and replace other deprecates
 
 # Reference
 
@@ -35,7 +39,6 @@
 [Basic sockets](https://www.geeksforgeeks.org/socket-programming-cc/)
 [Lifecycle of a docker container](https://medium.com/@nagarwal/lifecycle-of-docker-container-d2da9f85959)
 [Network analyzer docker image](https://github.com/jpcofr/netshoot)
-[Cisco docs about OSPF](https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/7039-1.html)
 [More docs about OSPF](https://www.routeralley.com/guides/ospf.pdf)
 
 # Notes

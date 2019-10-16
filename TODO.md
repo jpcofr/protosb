@@ -1,30 +1,35 @@
 # TODO
 
-- Start reading the RFC <https://www.ietf.org/rfc/rfc2328.txt>
-  - [Cisco docs about OSPF](https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/7039-1.html)
-- Client + Server communicating OSPF packets using raw sockets
+- Implement the protocol over TCP (It should be possible to list the routes from this router to other routers)
+  - Implement flooding (maintain database synchronization)
+    - serialize a map and transmit it from a client from a server
+  - Routes should age and refreshed
+
+- Understand the protocol
+  - Technical reference
+  - Read the RFC <https://www.ietf.org/rfc/rfc2328.txt>
 
   - Raw socket development
+    - Client + Server communicating OSPF packets using raw sockets
     - Listen to artificial TCP packets
     - [Listening on raw sockets](https://stackoverflow.com/questions/13082023/raw-socket-listener)
     - [IP SPOOFING with BSD RAW SOCKETS INTERFACE](http://www.enderunix.org/docs/en/rawipspoof/)
     - [Raw socket tutorial](http://www.cs.binghamton.edu/~steflik/cs455/rawip.txt)
     - Server listens to many clients on different interfaces
-- Send and receive OSPF packages
+    - Send and receive OSPF packages
 
 - Configure many interfaces on container (each of them needs an IP)
-- [Mixing C and C++ code](https://isocpp.org/wiki/faq/mixing-c-and-cpp)
-- [Create a daemon](http://www.microhowto.info/howto/cause_a_process_to_become_a_daemon_in_c.html)
+- Create a daemon
 
 ## Posponed
 
+- [Mixing C and C++ code](https://isocpp.org/wiki/faq/mixing-c-and-cpp)
 - Make the build completely machine independent and autonomous
   - Separate executables for a client and a server on cmake
 - Learn to install build essentials or development support directly from the dockerfile
 - https://theboostcpplibraries.com/boost.graph-vertices-and-edges
 - https://theboostcpplibraries.com/
 - <https://hub.docker.com/_/gcc>
-- Use inet_ntop and replace other deprecates
 
 # Reference
 
@@ -45,4 +50,6 @@
 
 # Other
 
-- <https://github.com/skydive-project/skydive>
+- [skydive: An open source real-time network topology and protocols analyzer](https://github.com/skydive-project/skydive)
+
+Versions of boost: boost 1.65 Ubuntu, boost 1.68 Macos 

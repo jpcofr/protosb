@@ -6,7 +6,7 @@
 
 This command runs an unsecured linux attached to the local terminal that maps the container /home directory into the development directory.
 
-`docker run -it --security-opt seccomp=unconfined -v /Users/jpcf/Dropbox/protosb:/home/ alpine_devel:latest`
+`docker run -it --security-opt seccomp=unconfined -v <path_to_map>:/home/ alpine_devel:latest`
 
 # Analyzing network traffic
 

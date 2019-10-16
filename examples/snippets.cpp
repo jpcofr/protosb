@@ -8,7 +8,7 @@
 // c++ -std=c++11 src/server.cpp -o example
 // c++ -x c src/client.c -o ex_client
 // c++ -x c src/server.c -o ex_server
-// c++ -I /Users/jpcf/Desktop/test/boost_1_65_0 /Users/jpcf/swAtelier/src/showcase/showcase_sandbox/cpp/casual/KnowYourTrade.cpp  -o example
+
 
 // Server side C/C++ program to demonstrate Socket programming
 //Example code: A simple server side code, which echos back the received message.

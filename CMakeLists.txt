@@ -1,26 +1,12 @@
 cmake_minimum_required (VERSION 3.7)
 project (MINBUILD)
 
-#set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
+add_definitions(-DBOOST_ERROR_CODE_HEADER_ONLY) # https://bit.ly/2ny3GON
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-#FIND_PACKAGE( Boost 1.65.0 COMPONENTS program_options REQUIRED )
-#INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
-
-#FIND_PACKAGE(Boost)
-#IF (Boost_FOUND)
-#    INCLUDE_DIRECTORIES(${Boost_INCLUDE_DIR})
-#    ADD_DEFINITIONS( "-DHAS_BOOST" )
-#ENDIF()
-#
-##set(BOOST_ROOT  /usr/local/boost_1_65_0/boost)
-##set(BOOST_LIBARYDIR /usr/local/boost_1_65_0/boost)
-##set(Boost_USE_STATIC_LIBS ON)
-#
-#find_package(Boost REQUIRED COMPONENTS asio)
-
 add_compile_options(
-  "-g"
+  "-ggdb" "-std=c++11"
 )
 
 add_subdirectory (src)

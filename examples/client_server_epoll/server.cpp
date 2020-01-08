@@ -14,7 +14,7 @@ void server_error(std::string msg)
   std::cerr << msg;
   exit(EXIT_FAILURE);
 }
-
+// change 2
 int main(int argc, char const *argv[])
 {
   // Creating socket file descriptor (See https://bit.ly/2z6zTiG)
